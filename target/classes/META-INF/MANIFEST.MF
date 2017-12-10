@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Built-By: Venkatesh
+Class-Path: guava-21.0.jar logback-classic-1.1.8.jar logback-core-1.1.
+ 8.jar slf4j-api-1.5.6.jar slf4j-simple-1.5.6.jar log4j-1.2.17.jar log
+ 4j-core-2.8.1.jar log4j-api-2.8.1.jar
+Build-Jdk: 1.8.0_151
+Created-By: Maven Integration for Eclipse
+Main-Class: mevenk.logging.tracker.runner.RunLogTracker
+
