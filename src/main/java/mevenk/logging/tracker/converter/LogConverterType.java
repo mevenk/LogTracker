@@ -4,7 +4,7 @@ import mevenk.logging.tracker.bean.Log;
 
 public enum LogConverterType {
 
-	LOG4J_1(null), LOG4J_2(new Log4j2Converter()), LOGBACK(null);
+	LOG4J_1(new Log4j1Converter()), LOG4J_2(new Log4j2Converter()), LOGBACK(new LogbackConverter());
 
 	private final Converter converter;
 

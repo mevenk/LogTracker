@@ -49,6 +49,15 @@ public class SocketConnectionHandler implements Runnable {
 				Log log = converterType.convert(obj);
 				eventBus.post(log);
 			}
+		} catch (IllegalArgumentException illegalArgumentException) {
+			String messageException = illegalArgumentException.getMessage();
+			if (messageException.startsWith("Unknown level constant [")) {
+				String level = messageException.substring(messageException.indexOf('[') + 1,
+						messageException.indexOf(']'));
+				System.out.println("LEVEL Received: " + level);
+			} else {
+				throw illegalArgumentException;
+			}
 		} catch (EOFException e) {
 			// When client closes connection, the stream will run out of data,
 			// and the ObjectInputStream.readObject method will throw the exception

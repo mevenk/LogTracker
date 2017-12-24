@@ -3,6 +3,8 @@
  */
 package mevenk.logging.tracker.runner;
 
+import java.util.Iterator;
+
 import mevenk.logging.tracker.bean.CircularBuffer;
 import mevenk.logging.tracker.bean.Log;
 import mevenk.logging.tracker.tracker.socket.SocketLogServer;
@@ -21,23 +23,25 @@ public class RunLogTracker {
 	 */
 	public static void main(String[] args) throws InterruptedException {
 
-		buffer = new CircularBuffer<>(5);
+		buffer = new CircularBuffer<>(50000);
 
 		final int port = 4445;
 		SocketLogServer socketLogServer = new SocketLogServer(port);
+		socketLogServer.addLogEventListener(buffer);
 
 		socketLogServer.start();
 
-		while (true) {
-			//System.out.println(buffer.size());
-			for (Log currentLog : buffer) {
-				System.out.println(currentLog);
-			}
-			Thread.sleep(1000);
+		Thread.sleep(30000);
 
+		socketLogServer.stop();
+
+		Log log = null;
+		Iterator<Log> iteratorLogs = buffer.iterator();
+		System.out.println("Logs Received: -----------------------------");
+		while (iteratorLogs.hasNext()) {
+			log = iteratorLogs.next();
+			System.out.println(log);
 		}
-
-		// socketLogServer.stop();
 
 	}
 
